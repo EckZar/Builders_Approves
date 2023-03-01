@@ -29,7 +29,7 @@ function sendRowToSheet(){
         let headKeys = ['empty_col_name', ...MAIN_REQUESTS_SHEET.getRange(2, 1, 1, MAIN_REQUESTS_SHEET.getLastColumn()).getValues()[0]];
         
         newRows.forEach(row=>{
-            if(row[29] == "Направляется на согласование заказчику"){
+            if(row[29] == "Направляется на согласование заказчику" && row[25] != ''){
 
                 let directionSheetData = getDirectionSheetData(row);            
                 let directionId: string = directionSheetData[0][2];

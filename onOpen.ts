@@ -7,6 +7,7 @@ function onOpen(e: any){
     .addItem("согласование 100го кода (с типовым описанием)", "soglas_100_kod")
     .addItem("согласование 111го кода (СБЦ/МРР)", "soglas_111_kod")
     .addItem("оповещение о выдачи задачи (с ID в Планере)", "send_4")
+    .addItem("оповещение о новой задаче с ВРЗ", "opoveshenie_s_ssilkoi")
     .addToUi()
   
   };

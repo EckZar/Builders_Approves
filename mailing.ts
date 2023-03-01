@@ -444,3 +444,31 @@ function soglas_111_kod(){
   
   
 };
+
+
+function opoveshenie_s_ssilkoi() {
+  var data = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Запрос поручений');
+  var range = data.getActiveRange().getValues();
+  var subject = 'Новый запрос по задаче с ВРЗ в таблице-запросов. № ' + range[0][0];
+  var arrData = range[0];
+  var arrEmails = [];
+  for (var i = 0; i < arrData.length; i++) {
+      var email = arrData[i];
+      if (email.length > 1 && email.search("@") > 0) {
+          arrEmails.push(email);
+      }
+  }
+  var cc = arrEmails.join(",");
+  MailApp.sendEmail({
+      to: range[0][16],
+      cc: range[0][17] + " , " + range[0][18] + " , " + range[0][19] + " , " + range[0][20] + " , " + range[0][21],
+      subject: subject,
+      htmlBody: "Здравствуйте!" + "<br>" +
+          " В таблице-запросов поручений FEE добавлен новый запрос по задаче с ВРЗ: № " + range[0][0] + "<br>" +
+          " Прошу ГИПа направить запрос на согласование в таблицу заказчика" + "<br><br>" +
+          " - Проект: " + range[0][1] + "<br>" +
+          " - Задача: " + range[0][2] + "<br><br>" +
+          " - Ссылка на таблицу запросов дирекции FEE:" + "<br><br>" +
+          " https://docs.google.com/spreadsheets/d/1Ivoqkpvfz-cUxeF3qCTLahWs_HDT6qqPhDEe5b6EWqQ/edit?usp=sharing"
+  });
+}

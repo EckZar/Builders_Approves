@@ -60,6 +60,29 @@ function sendRowToSheet(){
     };
 };
 
+function updateFormulas(){
+
+    if(!MAIN_REQUESTS_SHEET){
+        throw Error('');
+    };
+
+    let formulas = MAIN_REQUESTS_SHEET.getRange("AC:AF").getFormulas()
+
+    MAIN_REQUESTS_SHEET.getRange("W:Y").getValues()
+                        .map((item, i) => [i, ...item])
+                        .filter(item => item[1] && !item[2] && item[3])
+                        .forEach(item => {
+                            Logger.log(item);
+                            Logger.log(formulas[item[0]]); 
+
+                            try{
+                            MAIN_REQUESTS_SHEET.getRange(`AC${item[0]+1}`).setValue(formulas[item[0]][0])
+                            MAIN_REQUESTS_SHEET.getRange(`AF${item[0]+1}`).setValue(formulas[item[0]][3])
+                            }catch(e){}
+                        });
+
+};
+
 function  checkNewRequests(): boolean{
 
     if(!MAIN_REQUESTS_SHEET){
